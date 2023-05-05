@@ -2,13 +2,13 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import "./App.css";
 // import Navbar from "./components/Navbar/Navbar";
-import AllRoutes from "./AllRoutes";
+import Routes from "./router/Router";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <AllRoutes />
+        <Routes />
       </Router>
     </div>
   );
