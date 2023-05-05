@@ -1,0 +1,109 @@
+/* Set global styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7efe2;
+  color: #333333;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Style the form */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #f2ddb6;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.leftside,
+.rightside {
+  width: 48%;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 16px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #ffcc33;
+  color: #333333;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 20px 120px;
+}
+
+button[type="submit"]:hover {
+  background-color: #2df93b;
+}
+
+/* Style error messages */
+input:invalid,
+textarea:invalid,
+input[type="number"]:invalid {
+  border-color: #ff0000;
+}
+
+input:valid,
+textarea:valid,
+input[type="number"]:valid {
+  border-color: #cccccc;
+}
+
+.success {
+  color: #008000;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.submitButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+  margin-left: 5.5rem;
+  padding: 9px 80px;
+  border-radius: 5px;
+}
+.submitButton button[type="submit"] {
+  width: 10rem;
+  padding: 20px 100px;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 16px;
+}
