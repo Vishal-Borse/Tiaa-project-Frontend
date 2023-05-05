@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./ConsumerSignup.css";
-
-import { conSignup } from "../../actions/auth";
+import Dummy from "../../Pages/Dummy/dummy";
+// import { conSignup } from "../../actions/auth";
 
 const ConsumerSignup = () => {
   const [name, setName] = useState("");

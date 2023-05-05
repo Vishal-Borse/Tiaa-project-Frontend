@@ -3,8 +3,9 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 // import Footer from "../.././components/Footer/footer";
 // import Navbar from "../.././components/Navbar/navbar";
+// import Dummy from "../Dummy/dummy";
 import styles from "./signup.module.css";
-// import { isValidEmail } from "../Utilis/isValidEmail";
+import { isValidEmail } from "../../Utilis/isValidEmail";
 import axios from "axios";
 // import BASE_URL from "../.././pages/Utilis/helper";
 
@@ -14,9 +15,15 @@ const SignUp = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [aadharNo, setAadharNo] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [age, setAge] = useState("");
   const [formLoading, setFormLoading] = useState(false);
 
   const submissionHandler = async () => {
+    console.log("Entered");
     if (!firstName) {
       toast.error("Enter First Name");
       return;
@@ -25,49 +32,74 @@ const SignUp = () => {
       toast.error("Enter Last Name");
       return;
     }
-    // if (!isValidEmail(email)) {
-    //   toast.error("Enter Valid Email");
-    //   return;
-    // }
+    if (!isValidEmail(email)) {
+      toast.error("Enter Valid Email");
+      return;
+    }
     if (!password) {
       toast.error("Enter Password");
       return;
     }
-    // setFormLoading(true);
+    if (!phone) {
+      toast.error("Enter Phone");
+      return;
+    }
+    if (!aadharNo) {
+      toast.error("Enter Aadhar No");
+      return;
+    }
+    if (!state) {
+      toast.error("Enter State");
+      return;
+    }
+    if (!city) {
+      toast.error("Enter City");
+      return;
+    }
+    if (!age) {
+      toast.error("Enter Age");
+      return;
+    }
+    setFormLoading(true);
 
-    // const formData = {
-    //   userFirstName: firstName,
-    //   userLastName: lastName,
-    //   userEmail: email,
-    //   userPassword: password,
-    // };
+    const formData = {
+      consumerFirstName: firstName,
+      consumerLastName: lastName,
+      consumerEmail: email,
+      consumerPassword: password,
+      consumerPhone: phone,
+      consumerAadharNo: aadharNo,
+      consumerState: state,
+      consumerCity: city,
+      consumerAge: age,
+    };
 
-    // try {
-    //   const url = `${BASE_URL}/signup`;
-    //   const response = await axios.post(url, formData);
+    try {
+      const url = "http://localhost:8080/consumer/signup";
+      const response = await axios.post(url, formData);
 
-    //   if (response.status === 201) {
-    //     navigate("/signin");
-    //     return;
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    //   if (error.response.status === 400) {
-    //     toast.success("user already registered");
-    //     navigate("/signin");
-    //   }
-    //   if (error.response?.data?.message) {
-    //     toast.error(error.response.data.message);
-    //   }
-    // }
+      if (response.status === 201) {
+        navigate("/dummy");
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 400) {
+        toast.success("user already registered");
+        navigate("/dummy");
+      }
+      if (error.response?.data?.message) {
+        toast.error(error.response.data.message);
+      }
+    }
 
-    // setFormLoading(false);
+    setFormLoading(false);
   };
   return (
     <div>
       <div className={styles.UserRegistration}>
         <div className={styles.wrapper}>
-          <h2 className={styles.title}>User Registration</h2>
+          <h2 className={styles.title}>Consumer Registration</h2>
 
           <form className={styles.form}>
             <div className={styles.inputField}>
@@ -91,13 +123,13 @@ const SignUp = () => {
               />
             </div>
             <div className={styles.inputField}>
-              <label>Last Name</label>
+              <label>Email</label>
               <input
                 type="email"
                 placeholder="Email"
                 className={styles.input}
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className={styles.inputField}>
@@ -111,34 +143,24 @@ const SignUp = () => {
               />
             </div>
             <div className={styles.inputField}>
-              <label>Email</label>
+              <label>Phone No</label>
+              <input
+                type="number"
+                placeholder="Phone No"
+                className={styles.input}
+                required={true}
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+            <div className={styles.inputField}>
+              <label>Aadhar No</label>
               <input
                 type="number"
                 placeholder="Aadhar No"
                 className={styles.input}
-                required={true}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className={styles.inputField}>
-              <label>Password</label>
-              <input
-                type="number"
-                placeholder="No. of Family Members"
-                className={styles.input}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className={styles.inputField}>
-              <label>City</label>
-              <input
-                type="text"
-                placeholder="city"
-                className={styles.input}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={aadharNo}
+                onChange={(e) => setAadharNo(e.target.value)}
               />
             </div>
             <div className={styles.inputField}>
@@ -147,27 +169,28 @@ const SignUp = () => {
                 type="text"
                 placeholder="State"
                 className={styles.input}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={state}
+                onChange={(e) => setState(e.target.value)}
               />
             </div>
             <div className={styles.inputField}>
-              <label>Zip Code</label>
+              <label>City</label>
+              <input
+                type="text"
+                placeholder="city"
+                className={styles.input}
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </div>
+            <div className={styles.inputField}>
+              <label>Age</label>
               <input
                 type="number"
-                placeholder="Zip Code"
+                placeholder="Age"
                 className={styles.input}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className={styles.inputField}>
-              <label>Date of Birth</label>
-              <input
-                type="date"
-                className={styles.input}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
               />
             </div>
             <div className={styles.inputField}>
