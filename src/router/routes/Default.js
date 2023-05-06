@@ -1,24 +1,22 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-// import Home from "../../pages/Home/home";
-// import Dashboard from "../../pages/Dashboard/dashboard";
-import Signup from "../../Pages/Signup/signup";
-import Dummy from "../../Pages/Dummy/dummy";
-// import Signin from "../../pages/SignIn/signin";
-// import FriendsList from "../../components/FriendsList/friendsList";
-// import Logout from "../../pages/Logout/logout";
-// import Loading from "../../components/Loading/loading";
+
+import Home from "../../Pages/Home/home"
+import ConsumerSignin from "../../Pages/Consumer/Signin/signin";
+import ConsumerSignup from "../../Pages/Consumer/Signup/signup";
+import OrganizationSignup from "../../Pages/Organization/Signup/signup";
+import OrganizationSignin from "../../Pages/Organization/Signin/signin";
+
 
 const Default = () => {
   return (
     <Routes>
-      <Route index element={<Signup />} />
-      {/* <Route index element={<Loading/>} /> */}
-      {/* <Route path="/signup" element={<Signup />} />
-      <Route path="/signin" element={<Signin />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/dashboard/logout" element={<Logout />} /> */}
-      <Route path="/dummy" element={<Dummy />} />
+      <Route index element={<Home/>} />
+      <Route path="/consumer/signin" element={<ConsumerSignin/>} />
+      <Route path="/consumer/signup" element={<ConsumerSignup/>} />
+      <Route path="/organization/signin" element={<OrganizationSignin/>} />
+      <Route path="/organization/signup" element={<OrganizationSignup/>} />
+
     </Routes>
   );
 };

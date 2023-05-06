@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 // import Navbar from "../.././components/Navbar/navbar";
 // import Dummy from "../Dummy/dummy";
 import styles from "./signup.module.css";
-import { isValidEmail } from "../../Utilis/isValidEmail";
+import { isValidEmail } from "../../../Utilis/isValidEmail";
 import axios from "axios";
 // import BASE_URL from "../.././pages/Utilis/helper";
 
@@ -75,7 +75,7 @@ const SignUp = () => {
     };
 
     try {
-      const url = "http://localhost:8080/consumer/signup";
+      const url = "http://localhost:8081/consumer/signup";
       const response = await axios.post(url, formData);
 
       if (response.status === 201) {
