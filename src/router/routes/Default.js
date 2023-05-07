@@ -7,11 +7,14 @@ import ConsumerSignup from "../../Pages/Consumer/Signup/signup";
 import OrganizationSignup from "../../Pages/Organization/Signup/signup";
 import OrganizationSignin from "../../Pages/Organization/Signin/signin";
 import Dummy from "../../Pages/Dummy/dummy";
+import ConsumerDashboard from "../../Pages/Consumer/Dashboard/dashboard";
+import OrganizationDashboard from "../../Pages/Organization/Dashboard/dashboard";
 
 const Default = () => {
   return (
     <Routes>
-      <Route index element={<Dummy />} />
+      <Route index element={<OrganizationDashboard/>} />
+      <Route path="/consumer/dashboard" element={<ConsumerDashboard />} />
       <Route path="/consumer/signin" element={<ConsumerSignin />} />
       <Route path="/consumer/signup" element={<ConsumerSignup />} />
       <Route path="/organization/signin" element={<OrganizationSignin />} />

@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+
+
+/* ......................................................................................... */
+
+.profile{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  
+}
+.profile_img img {
+  width: 300px;
+  height: 300px;
+}
+.profile_img{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 100px;
+  margin-left: 100px;
+  /* background-color: #c3acd0; */
+}
+.details{
+  width: 500px;
+  font-family: "Poppins", sans-serif;
+  text-align: start;
+  border-radius: 8px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 20px 150px 20px 90px;
+}
+/* .......................................................................................................... */
+
+.fc_head {
+  margin: 30px auto 10px auto;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: bolder;
+  background-color: #ffe5b4;
+  width: 200px;
+  padding: 5px;
+  border-radius: 6px;
+  color: #e8aa42;
+}
+
+
+
+.facilities {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.fc_head {
+  margin: auto;
+  text-align: center;
+  /* font-family: 'Raleway', sans-serif; */
+  /* font-family: "Montserrat", sans-serif; */
+  font-family: "Poppins", sans-serif;
+  font-weight: bolder;
+  background-color: #ffe5b4;
+  width: 200px;
+  padding: 5px;
+  border-radius: 6px;
+  color: #e8aa42;
+}
+.facilities h1 {
+  /* font-family: "Montserrat", sans-serif; */
+  font-family: "Poppins", sans-serif;
+  font-weight: bolder;
+  text-align: center;
+  font-size: 40px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+.cards {
+  padding: 20px 80px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.cards img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+.fc_card {
+  font-family: "Poppins", sans-serif;
+  width: 250px;
+  margin: 20px;
+  padding: 20px 10px;
+  border-radius: 8px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+}
+.event_icon{
+  font-size: 50px;
+  color: #674188;
+}
+.fc_card h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 40px;
+  
+}
+

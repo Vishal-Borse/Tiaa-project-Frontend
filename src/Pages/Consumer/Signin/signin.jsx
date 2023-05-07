@@ -9,12 +9,16 @@ import { isValidEmail } from "../../../Utilis/isValidEmail";
 import axios from "axios";
 import { Link } from "react-router-dom";
 // import BASE_URL from "../.././pages/Utilis/helper";
+import {useCookies} from 'react-cookie'
+
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formLoading, setFormLoading] = useState(false);
+  const [cookie, setCookie] = useCookies(['access_token'])
+
 
   const submissionHandler = async () => {
     console.log("Entered");
@@ -40,14 +44,15 @@ const SignUp = () => {
       const response = await axios.post(url, formData);
 
       if (response.status === 201) {
-        navigate("/dummy");
+        setCookie('access_token', response.data.jwttoken)
+        navigate("/consumer/dashboard");
         return;
       }
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) {
         toast.success("user already registered");
-        navigate("/dummy");
+        navigate("/consumer/dashboard");
       }
       if (error.response?.data?.message) {
         toast.error(error.response.data.message);
