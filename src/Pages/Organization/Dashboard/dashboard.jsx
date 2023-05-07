@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from "./dashboard.module.css";
 import { useNavigate } from "react-router-dom";
+import { ImCancelCircle } from "react-icons/im";
 
 // import Photo from "./Images/budget.png";
 // import Footer from "../.././components/Footer/footer.jsx";
@@ -212,9 +213,15 @@ const OrganizationDashboard = () => {
             {showModal && selectedEvent && (
               <div className={styles.modal}>
                 <div className={styles.modal_content}>
-                  <span className={styles.close} onClick={handleCloseModal}>
+                  {/* <span className={styles.close} onClick={handleCloseModal}>
                     &times;
-                  </span>
+                  </span> */}
+                  <div className={styles.cancel_btn_div}>
+                    <ImCancelCircle
+                      className={styles.cancel_btn}
+                      onClick={handleCloseModal}
+                    />
+                  </div>
                   <h2>{selectedEvent.eventName}</h2>
                   <p>Date: {selectedEvent.eventDate}</p>
                   <p>State: {selectedEvent.eventState}</p>
@@ -263,7 +270,7 @@ const OrganizationDashboard = () => {
                     </tbody>
                   </table>
 
-                  <div className={styles.book_slot}>
+                  {/* <div className={styles.book_slot}>
                     <div className= {styles.input_container}>
                       <label htmlFor="start-time">Start Time</label>
                       <input
@@ -285,12 +292,12 @@ const OrganizationDashboard = () => {
                     <button className={styles.book_button} onClick={handleBookSlot}>
                       Book the Slot
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             )}
           </div>
-          {visibleEvents < eventsData.length && (
+          {visibleEvents < allEvents.length && (
             <div className={styles.view_more}>
               <button onClick={handleViewMore}>View More Events</button>
             </div>

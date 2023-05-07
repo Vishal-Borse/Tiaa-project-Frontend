@@ -97,13 +97,31 @@
     position: relative;
     font-size: 25px;
   }
+
+  .modal_content h2, .modal_content p {
+    margin: 0px;
+    margin-bottom: 4px;
+  }
   
-  .close {
+  /* .close {
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
     font-size: 20px;
+  } */
+
+  .cancel_btn_div {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+  .cancel_btn {
+    color: #674188;
+    font-size: 25px;
+  }
+  .cancel_btn:hover {
+    color: #c3acd0;
   }
   
   .view_more button{

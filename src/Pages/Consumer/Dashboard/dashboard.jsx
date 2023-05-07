@@ -3,6 +3,7 @@ import styles from "./dashboard.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { ImCancelCircle } from "react-icons/im";
 
 // import Photo from "./Images/budget.png";
 // import Footer from "../.././components/Footer/footer.jsx";
@@ -17,19 +18,54 @@ import { MdEmojiEvents } from "react-icons/md";
 import profileImage from "../../../profile.png";
 import { useEffect, useState } from "react";
 import BookEvent from "../../../Components/eventBookModal/eventBook";
+import eventIcon from "./images/icon.png";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [consumerEvents, setconsumerEvents] = useState([]);
   const [consumerDetails, setconsumerDetails] = useState([]);
   const [isEventBookOpen, setIsEventBookOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [visibleEvents, setVisibleEvents] = useState(6);
+
+  const [allEvents, setAllEvents] = useState([]);
 
   const handleEventBook = () => {
     setIsEventBookOpen(!isEventBookOpen);
   };
 
-  const bookEvent = async(ID)=>{
+  const handleCardClick = (event) => {
+    setSelectedEvent(event);
+    setShowModal(true);
+  };
 
+  const handleViewMore = () => {
+    setVisibleEvents((prevVisibleEvents) => prevVisibleEvents + 3);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+
+  const handleStartTimeChange = (e) => {
+    setStartTime(e.target.value);
+  };
+
+  const handleEndTimeChange = (e) => {
+    setEndTime(e.target.value);
+  };
+
+  const handleBookSlot = () => {
+    // Add your logic for booking the slot
+    console.log("Slot booked!");
+    console.log("Start Time:", startTime);
+    console.log("End Time:", endTime);
+  };
+
+  const bookEvent = async (ID) => {
     const formData = {
       eventId: ID,
     };
@@ -44,11 +80,7 @@ const Home = () => {
       toast.error(error.response.data.message);
     }
     // setIsEventBookOpen(!isEventBookOpen);
-
-
-
-
-  }
+  };
   useEffect(() => {
     const getDashboard = async () => {
       try {
@@ -56,13 +88,14 @@ const Home = () => {
         const response1 = await axios.get(url1, { withCredentials: true });
         const userEvents = response1.data;
 
+        setAllEvents(userEvents);
+        console.log(userEvents);
+
         const url2 = "http://localhost:8081/consumer/getDetails";
         const response2 = await axios.get(url2, { withCredentials: true });
         const userDetails = response2.data;
 
-        setconsumerEvents(userEvents);
         setconsumerDetails(userDetails);
-        console.log(userEvents);
         console.log(userDetails);
       } catch (error) {
         console.log(error);
@@ -100,25 +133,112 @@ const Home = () => {
         </div>
       </section>
 
-      <div className={styles.facilities}>
-        <div className={styles.fc_head}>Your created events</div>
-      </div>
-
-      <div className={styles.cards}>
-        {consumerEvents?.map((Event) => {
-          return (
-            <div className={styles.fc_card}>
-              <MdEmojiEvents className={styles.event_icon} />
-              <h2>{Event.eventName}</h2>
-              <p>{Event.eventState}</p>
-              <h3>{Event.eventDate}</h3>
-              <button onClick={handleEventBook}>Book Slot</button>
-              {isEventBookOpen ? (
-                <BookEvent closeCallback={handleEventBook} />
-              ) : null}
+      <div className={styles.events}>
+        <h1>Events</h1>
+        <div className={styles.event_grid}>
+          {allEvents.slice(0, visibleEvents).map((event) => (
+            <div
+              key={event._id}
+              className={styles.event_block}
+              onClick={() => handleCardClick(event)}
+            >
+              <img src={eventIcon} alt="Event Icon" />
+              {/* <MdEmojiEvents className={styles.event_icon} /> */}
+              <h3>{event.eventName}</h3>
+              <p>{event.eventDate}</p>
+              <p>{event.eventState}</p>
+              <p>{event.eventCity}</p>
             </div>
-          );
-        })}
+          ))}
+          {showModal && selectedEvent && (
+            <div className={styles.modal}>
+              <div className={styles.modal_content}>
+                <div className={styles.cancel_btn_div}>
+                  <ImCancelCircle
+                    className={styles.cancel_btn}
+                    onClick={handleCloseModal}
+                  />
+                </div>
+                <h2>{selectedEvent.eventName}</h2>
+                <p>Date: {selectedEvent.eventDate}</p>
+                <p>State: {selectedEvent.eventState}</p>
+                <p>City: {selectedEvent.eventCity}</p>
+                <p>Email: {selectedEvent.organizationEmail}</p>
+
+                <table className={styles.event_table}>
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Quantity</th>
+                      <th>Provider</th>
+                      <th>Mfg Date</th>
+                      <th>Expiry Date</th>
+                      <th>Allocated Per user</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {selectedEvent.rationDetails.map((data) => (
+                      <tr key={data._id}>
+                        <td>{data.item}</td>
+                        <td>{data.quantity}</td>
+                        <td>{data.provider}</td>
+                        <td>{data.mfgDate}</td>
+                        <td>{data.expiryDate}</td>
+                        <td>{data.allocatedPerUser}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+
+                <table className={styles.event_table}>
+                  <thead>
+                    <tr>
+                      <th>Start Time</th>
+                      <th>End Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {selectedEvent.rationSchedule.map((data) => (
+                      <tr key={data._id}>
+                        <td>{data.startTime}</td>
+                        <td>{data.endTime}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+
+                <div className={styles.book_slot}>
+                    <div className= {styles.input_container}>
+                      <label htmlFor="start-time">Start Time</label>
+                      <input
+                        type="text"
+                        id="start-time"
+                        value={startTime}
+                        onChange={handleStartTimeChange}
+                      />
+                    </div>
+                    <div className={styles.input_container}>
+                      <label htmlFor="end-time">End Time</label>
+                      <input
+                        type="text"
+                        id="end-time"
+                        value={endTime}
+                        onChange={handleEndTimeChange}
+                      />
+                    </div>
+                    <button className={styles.book_button} onClick={handleBookSlot}>
+                      Book the Slot
+                    </button>
+                  </div>
+              </div>
+            </div>
+          )}
+        </div>
+        {visibleEvents < allEvents.length && (
+          <div className={styles.view_more}>
+            <button onClick={handleViewMore}>View More Events</button>
+          </div>
+        )}
       </div>
 
       <Footer />
