@@ -139,7 +139,7 @@ const OrganizationDashboard = () => {
         // console.log(userDetails);
       } catch (error) {
         console.log(error);
-        navigate("/consumer/signin");
+        navigate("/organization/signin");
       }
     };
     getDashboard();
