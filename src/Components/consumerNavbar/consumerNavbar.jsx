@@ -16,16 +16,13 @@ const Navbar = () => {
           Home
         </Link>
         <Link to={"/dashboard/logout"} className={styles.logout}>
-          Past Events
+          Booked Slot
         </Link>
         <Link to={"/dashboard/logout"} className={styles.logout}>
-          Booked Events
+          Logout
         </Link>
       </div>
-      <div className={styles.profile}>
-        <CgProfile className={styles.profile_img} />
-        <p>Hii Vishal!</p>
-      </div>
+      
     </div>
   );
 };

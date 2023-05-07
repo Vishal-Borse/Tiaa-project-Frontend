@@ -5,9 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ImCancelCircle } from "react-icons/im";
 
-// import Photo from "./Images/budget.png";
-// import Footer from "../.././components/Footer/footer.jsx";
-// import Navbar from "../.././components/Navbar/navbar.jsx";
 import Navbar from "../../../Components/consumerNavbar/consumerNavbar";
 import { Footer } from "../../../Components/Footer/footer";
 import { FcOrganization } from "react-icons/fc";
@@ -27,6 +24,9 @@ const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [visibleEvents, setVisibleEvents] = useState(6);
+  const [formLoading, setFormLoading] = useState(false);
+  const [filter, setFilter] = useState("");
+  
 
   const [allEvents, setAllEvents] = useState([]);
 
@@ -49,6 +49,10 @@ const Home = () => {
 
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  var [filters, setFilters] = useState({
+    eventState: "",
+    eventDate: "",
+  });
 
   const handleStartTimeChange = (e) => {
     setStartTime(e.target.value);
@@ -58,17 +62,19 @@ const Home = () => {
     setEndTime(e.target.value);
   };
 
-  const handleBookSlot = (starttime,endtime) => {
+  const handleBookSlot = async (starttime, endtime, ID, e) => {
     // Add your logic for booking the slot
     e.preventDefault();
     setFormLoading(true);
 
     const formData = {
-      startTime : start
+      startTime: starttime,
+      endTime: endtime,
+      eventId: ID,
     };
-    console.log(formData);
+    // console.log(formData);
     try {
-      const url = "http://localhost:8081/organization/addEvent";
+      const url = "http://localhost:8081/consumer/bookSlot";
       const response = await axios.post(url, formData, {
         withCredentials: true,
       });
@@ -76,7 +82,7 @@ const Home = () => {
       navigate(0);
     } catch (error) {
       toast.error(error.response.data.message);
-      navigate("/organization/dashboard");
+      navigate("/consumer/dashboard");
     }
     setFormLoading(false);
 
@@ -101,6 +107,25 @@ const Home = () => {
     }
     // setIsEventBookOpen(!isEventBookOpen);
   };
+
+  const filterClicked = (filterParams) => {
+    setFilters(filterParams);
+  };
+
+  const transactionsforFilter = allEvents.filter((event) => {
+    if (Object.keys(filters).length === 0) {
+      return true;
+    }
+    return Object.keys(filters).every((key) => {
+      console.log(key, filters[key]);
+      console.log(event[key]);
+      if (!filters[key].length) {
+        return true;
+      }
+      return event[key].toLowerCase() === filters[key];
+    });
+  });
+  console.log(transactionsforFilter);
   useEffect(() => {
     const getDashboard = async () => {
       try {
@@ -155,8 +180,63 @@ const Home = () => {
 
       <div className={styles.events}>
         <h1>Events</h1>
+        <div className={styles.sorting}>
+          <div className={styles.categories}>
+            <select
+              className={styles.select_categories}
+              value={filters.state}
+              onChange={(e) => {
+                filterClicked({ ...filters, eventState: e.target.value });
+                // setFilters({ ...filters, category: e.target.value });
+              }}
+            >
+              <option>State</option>
+              <option value="andhra_pradesh">Andhra Pradesh</option>
+              <option value="arunachal_pradesh">Arunachal Pradesh</option>
+              <option value="assam">Assam</option>
+              <option value="bihar">Bihar</option>
+              <option value="chhatisgarh">Chhatisgarh</option>
+              <option value="goa">Goa</option>
+              <option value="gujrat">Gujrat</option>
+              <option value="haryana">Haryana</option>
+              <option value="himachal_pradesh">Other</option>
+              <option value="jammu_kashmir">Other</option>
+              <option value="jharkhand">Other</option>
+              <option value="karnataka">Other</option>
+              <option value="kerala">Other</option>
+              <option value="madhya_pradesh">Other</option>
+              <option value="maharashtra">Other</option>
+              <option value="manipur">Other</option>
+              <option value="meghalaya">Other</option>
+              <option value="mizoram">Other</option>
+              <option value="nagaland">Other</option>
+              <option value="odisha">Other</option>
+              <option value="punjab">Other</option>
+              <option value="rajasthan">Other</option>
+              <option value="sikkim">Other</option>
+              <option value="tamil_nadu">Other</option>
+              <option value="telangana">Other</option>
+              <option value="tripura">Other</option>
+              <option value="uttar_pradesh">Other</option>
+              <option value="uttarakhand">Other</option>
+              <option value="west_bengal">Other</option>
+            </select>
+          </div>
+          <div className={styles.searchby}>
+            <input
+              value={filters.date}
+              onChange={(e) => {
+                filterClicked({ ...filters, eventDate: e.target.value });
+                // setFilters({ ...filters, category: e.target.value });
+              }}
+              className={styles.searchby_date}
+              placeholder="Search by"
+              type="date"
+            />
+          </div>
+        </div>
         <div className={styles.event_grid}>
-          {allEvents.slice(0, visibleEvents).map((event) => (
+          {transactionsforFilter.slice(0, visibleEvents).map((event) => (
             <div
               key={event._id}
               className={styles.event_block}
