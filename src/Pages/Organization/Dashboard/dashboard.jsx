@@ -16,7 +16,6 @@ import profilePicture from "./images/profile_picture.webp";
 import eventIcon from "./images/icon.png";
 import axios from "axios";
 
-
 const OrganizationDashboard = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -125,6 +124,24 @@ const OrganizationDashboard = () => {
     setShowModal(false);
   };
 
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+
+  const handleStartTimeChange = (e) => {
+    setStartTime(e.target.value);
+  };
+
+  const handleEndTimeChange = (e) => {
+    setEndTime(e.target.value);
+  };
+
+  const handleBookSlot = () => {
+    // Add your logic for booking the slot
+    console.log("Slot booked!");
+    console.log("Start Time:", startTime);
+    console.log("End Time:", endTime);
+  };
+
   useEffect(() => {
     const getDashboard = async () => {
       try {
@@ -133,13 +150,15 @@ const OrganizationDashboard = () => {
         const userEvents = response1.data;
 
         setAllEvents(userEvents);
+        console.log(userEvents);
+
         // setconsumerEvents(userEvents);
         // setconsumerDetails(userDetails);
         // console.log(userEvents);
         // console.log(userDetails);
       } catch (error) {
         console.log(error);
-        navigate("/consumer/signin");
+        navigate("/organization/signin");
       }
     };
     getDashboard();
@@ -171,35 +190,110 @@ const OrganizationDashboard = () => {
         <div className={styles.events}>
           <h1>Events</h1>
           <div className={styles.event_grid}>
-            {eventsData.slice(0, visibleEvents).map((event) => (
+            {allEvents.slice(0, visibleEvents).map((event) => (
               <div
-                key={event.id}
+                key={event._id}
                 className={styles.event_block}
                 onClick={() => handleCardClick(event)}
               >
-                <img src={event.icon} alt="Event Icon" />
-                <h3>{event.name}</h3>
-                <p>{event.date}</p>
+                <img src={eventIcon} alt="Event Icon" />
+                <h3>{event.eventName}</h3>
+                <p>{event.eventDate}</p>
+                <p>{event.eventState}</p>
+                <p>{event.eventCity}</p>
               </div>
             ))}
-            {visibleEvents < eventsData.length && (
+            {/* {visibleEvents < eventsData.length && (
               <div className={styles.view_more}>
                 <button onClick={handleViewMore}>View More Events</button>
               </div>
-            )}
+            )} */}
             {showModal && selectedEvent && (
               <div className={styles.modal}>
                 <div className={styles.modal_content}>
                   <span className={styles.close} onClick={handleCloseModal}>
                     &times;
                   </span>
-                  <h2>{selectedEvent.name}</h2>
-                  <p>Date: {selectedEvent.date}</p>
-                  <p>Description: {selectedEvent.description}</p>
+                  <h2>{selectedEvent.eventName}</h2>
+                  <p>Date: {selectedEvent.eventDate}</p>
+                  <p>State: {selectedEvent.eventState}</p>
+                  <p>City: {selectedEvent.eventCity}</p>
+                  <p>Email: {selectedEvent.organizationEmail}</p>
+
+                  <table className={styles.event_table}>
+                    <thead>
+                      <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Provider</th>
+                        <th>Mfg Date</th>
+                        <th>Expiry Date</th>
+                        <th>Allocated Per user</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {selectedEvent.rationDetails.map((data) => (
+                        <tr key={data._id}>
+                          <td>{data.item}</td>
+                          <td>{data.quantity}</td>
+                          <td>{data.provider}</td>
+                          <td>{data.mfgDate}</td>
+                          <td>{data.expiryDate}</td>
+                          <td>{data.allocatedPerUser}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+
+                  <table className={styles.event_table}>
+                    <thead>
+                      <tr>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {selectedEvent.rationSchedule.map((data) => (
+                        <tr key={data._id}>
+                          <td>{data.startTime}</td>
+                          <td>{data.endTime}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+
+                  <div className={styles.book_slot}>
+                    <div className= {styles.input_container}>
+                      <label htmlFor="start-time">Start Time</label>
+                      <input
+                        type="text"
+                        id="start-time"
+                        value={startTime}
+                        onChange={handleStartTimeChange}
+                      />
+                    </div>
+                    <div className={styles.input_container}>
+                      <label htmlFor="end-time">End Time</label>
+                      <input
+                        type="text"
+                        id="end-time"
+                        value={endTime}
+                        onChange={handleEndTimeChange}
+                      />
+                    </div>
+                    <button className={styles.book_button} onClick={handleBookSlot}>
+                      Book the Slot
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
           </div>
+          {visibleEvents < eventsData.length && (
+            <div className={styles.view_more}>
+              <button onClick={handleViewMore}>View More Events</button>
+            </div>
+          )}
         </div>
       </div>
       <Footer />
