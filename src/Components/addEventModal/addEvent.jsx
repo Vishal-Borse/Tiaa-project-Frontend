@@ -9,10 +9,10 @@ import { useNavigate } from "react-router-dom";
 
 const AddEvent = ({ closeCallback }) => {
   const navigate = useNavigate();
-  const [eventName, setEventName] = useState();
-  const [eventState, setEventState] = useState();
-  const [eventDate, setEventDate] = useState();
-  const [eventCity, setEventCity] = useState();
+  const [eventName, setEventName] = useState("");
+  const [eventState, setEventState] = useState("");
+  const [eventDate, setEventDate] = useState("");
+  const [eventCity, setEventCity] = useState("");
   const [rationDetail, setRationDetail] = useState({
     item: "",
     quantity: 0,
@@ -23,49 +23,61 @@ const AddEvent = ({ closeCallback }) => {
   });
   const [rationDetails, setRationDetails] = useState([]);
 
+  const [rationSchedule, setRationSchedule] = useState({
+    startTime: "",
+    endTime: "",
+  });
+  const [rationSchedules, setRationSchedules] = useState([]);
+
   const [formLoading, setFormLoading] = useState(false);
 
-  //   const addTransaction = async () => {
-  //     if (!category) {
-  //       toast.error("Select Category");
-  //       return;
-  //     }
-  //     if (!purpose) {
-  //       toast.error("Enter Purpose");
-  //       return;
-  //     }
-  //     if (!amount) {
-  //       toast.error("Enter Amount");
-  //       return;
-  //     }
-  //     setFormLoading(true);
+  const createEvent = async (e) => {
+    e.preventDefault();
+    console.log("In create event");
+    console.log(eventName);
+    // if (!eventName) {
+    //   toast.error("Enter Event Name");
+    //   return;
+    // }
+    // if (!eventState) {
+    //   toast.error("Enter Event State");
+    //   return;
+    // }
+    // if (!eventDate) {
+    //   toast.error("Enter Event Date");
+    //   return;
+    // }
+    // if (!eventCity) {
+    //   toast.error("Enter Event city");
+    //   return;
+    // }
+    setFormLoading(true);
 
-  //     const formData = {
-  //       transactionPurpose: purpose,
-  //       transactionAmount: amount,
-  //       transactionCategory: category,
-  //     };
+    console.log(rationDetails);
+    const formData = {
+      eventName: eventName,
+      eventState: eventState,
+      eventDate: eventDate,
+      eventCity: eventCity,
+      rationDetails: rationDetails,
+      scheduleDetails: rationSchedules,
+    };
+    console.log(formData);
+    try {
+      const url = "http://localhost:8081/organization/addEvent";
+      const response = await axios.post(url, formData, {
+        withCredentials: true,
+      });
+      console.log(response);
+      navigate(0);
+    } catch (error) {
+      toast.error(error.response.data.message);
+      navigate("/organization/dashboard");
+    }
+    setFormLoading(false);
+  };
 
-  //     try {
-  //       const url = `${BASE_URL}/dashboard/personaltransaction`;
-  //       const response = await axios.post(url, formData, {
-  //         withCredentials: true,
-  //       });
-  //       navigate(0);
-  //     } catch (error) {
-  //       toast.error(error.response.data.message);
-  //       navigate("/dashboard");
-  //     }
-  //     setFormLoading(false);
-  //   };
-
-  //   const addRationDetails = async()=>{
-  //      const details  ={
-  //         item:
-  //      }
-  //   }
-
-  const handleSubmit = (e) => {
+  const handleSubmitration = (e) => {
     e.preventDefault();
 
     setRationDetails([...rationDetails, rationDetail]);
@@ -76,6 +88,15 @@ const AddEvent = ({ closeCallback }) => {
       expiryDate: "",
       provider: "",
       allocatedPerUser: 0,
+    });
+  };
+
+  const handleScheules = (e) => {
+    e.preventDefault();
+    setRationSchedules([...rationSchedules, rationSchedule]);
+    setRationSchedule({
+      startTime: "",
+      endTime: "",
     });
   };
 
@@ -94,19 +115,43 @@ const AddEvent = ({ closeCallback }) => {
         <div className={styles.inputs}>
           <div className={styles.inputField}>
             <label>Event Name</label>
-            <input type="text" className={styles.input} required={true} />
+            <input
+              type="text"
+              value={eventName}
+              onChange={(e) => setEventName(e.target.value)}
+              className={styles.input}
+              required={true}
+            />
           </div>
           <div className={styles.inputField}>
             <label>Event Date</label>
-            <input type="date" className={styles.input} required={true} />
+            <input
+              type="date"
+              value={eventDate}
+              className={styles.input}
+              onChange={(e) => setEventDate(e.target.value)}
+              required={true}
+            />
           </div>
           <div className={styles.inputField}>
             <label>Event State</label>
-            <input type="text" className={styles.input} required={true} />
+            <input
+              type="text"
+              value={eventState}
+              onChange={(e) => setEventState(e.target.value)}
+              className={styles.input}
+              required={true}
+            />
           </div>
           <div className={styles.inputField}>
             <label>Event City</label>
-            <input type="text" className={styles.input} required={true} />
+            <input
+              type="text"
+              value={eventCity}
+              onChange={(e) => setEventCity(e.target.value)}
+              className={styles.input}
+              required={true}
+            />
           </div>
         </div>
         <div className={styles.rationDetails}>
@@ -120,7 +165,6 @@ const AddEvent = ({ closeCallback }) => {
               type="text"
               className={styles.input}
               placeholder="Item"
-              required={true}
             />
             <input
               value={rationDetail.quantity}
@@ -131,7 +175,6 @@ const AddEvent = ({ closeCallback }) => {
               type="number"
               className={styles.input}
               placeholder="Quantity"
-              required={true}
             />
             <input
               value={rationDetail.mfgDate}
@@ -142,7 +185,6 @@ const AddEvent = ({ closeCallback }) => {
               type="date"
               className={styles.input}
               placeholder="MFG Date"
-              required={true}
             />
             <input
               value={rationDetail.expiryDate}
@@ -151,7 +193,6 @@ const AddEvent = ({ closeCallback }) => {
               }
               type="date"
               className={styles.input}
-              required={true}
               placeholder="Expiry Date"
             />
             <input
@@ -161,7 +202,6 @@ const AddEvent = ({ closeCallback }) => {
               }
               type="text"
               className={styles.input}
-              required={true}
               placeholder="Provider"
             />
             <input
@@ -174,11 +214,10 @@ const AddEvent = ({ closeCallback }) => {
               }
               type="number"
               className={styles.input}
-              required={true}
               placeholder="Allocted Per User"
             />
           </div>
-          <button onClick={handleSubmit}>Add Details</button>
+          <button onClick={handleSubmitration}>Add Details</button>
           <div>
             <table>
               <thead>
@@ -188,16 +227,18 @@ const AddEvent = ({ closeCallback }) => {
                   <td>MFG Date</td>
                   <td>Exp Date</td>
                   <td>Provider</td>
+                  <td>Allocated Per User</td>
                 </tr>
               </thead>
               <tbody>
                 {rationDetails.map((detail) => (
-                  <tr>
+                  <tr key={detail.item}>
                     <td>{detail.item}</td>
                     <td>{`${detail.quantity}kg`}</td>
                     <td>{detail.mfgDate}</td>
                     <td>{detail.expirtyDate}4</td>
                     <td>{detail.provider}</td>
+                    <td>{detail.allocatedPerUser}</td>
                   </tr>
                 ))}
               </tbody>
@@ -208,18 +249,32 @@ const AddEvent = ({ closeCallback }) => {
           <h2>Ration Schedule</h2>
           <div>
             <input
+              value={rationSchedule.startTime}
+              onChange={(e) =>
+                setRationSchedule({
+                  ...rationSchedule,
+                  startTime: e.target.value,
+                })
+              }
               type="text"
               className={styles.input}
-              required={true}
               placeholder="Start Time"
             />
             <input
+              value={rationSchedule.endTime}
+              onChange={(e) =>
+                setRationSchedule({
+                  ...rationSchedule,
+                  endTime: e.target.value,
+                })
+              }
               type="text"
               className={styles.input}
-              required={true}
               placeholder="End Time"
             />
-            <button className={styles.inputs_btn}>Add Slot</button>
+            <button onClick={handleScheules} className={styles.inputs_btn}>
+              Add Slot
+            </button>
           </div>
         </div>
         <div>
@@ -231,15 +286,19 @@ const AddEvent = ({ closeCallback }) => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>10.00PM</td>
-                <td>2.00PM</td>
-              </tr>
+              {rationSchedules.map((schedule) => (
+                <tr key={`${schedule.startTime}-${schedule.endTime}`}>
+                  <td>{schedule.startTime}</td>
+                  <td>{schedule.endTime}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
         <div className={styles.inputs_btn}>
-          <button disabled={formLoading}>Create</button>
+          <button onClick={createEvent} disabled={formLoading}>
+            Create
+          </button>
         </div>
       </form>
     </div>
