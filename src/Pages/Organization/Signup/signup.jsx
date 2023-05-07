@@ -53,7 +53,7 @@ const SignUp = () => {
       organizationName: Organizationname,
       organizationEmail: email,
       organizationPassword: password,
-      licenseId: licenseid,
+      orgLicenseId: licenseid,
       organizationState: state,
     };
 
@@ -62,14 +62,14 @@ const SignUp = () => {
       const response = await axios.post(url, formData);
 
       if (response.status === 201) {
-        navigate("/dummy");
+        navigate("/organization/signin");
         return;
       }
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) {
         toast.success("Organization already registered");
-        navigate("/dummy");
+        navigate("/organization/signin");
       }
       if (error.response?.data?.message) {
         toast.error(error.response.data.message);

@@ -79,14 +79,14 @@ const SignUp = () => {
       const response = await axios.post(url, formData);
 
       if (response.status === 201) {
-        navigate("/dummy");
+        navigate("/consumer/signin");
         return;
       }
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) {
         toast.success("user already registered");
-        navigate("/dummy");
+        navigate("/consumer/signin");
       }
       if (error.response?.data?.message) {
         toast.error(error.response.data.message);

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from "./dashboard.module.css";
+import { useNavigate } from "react-router-dom";
+
 // import Photo from "./Images/budget.png";
 // import Footer from "../.././components/Footer/footer.jsx";
 // import Navbar from "../.././components/Navbar/navbar.jsx";
@@ -12,11 +14,16 @@ import { FaRegAddressCard } from "react-icons/fa";
 import { MdEmojiEvents } from "react-icons/md";
 import profilePicture from "./images/profile_picture.webp";
 import eventIcon from "./images/icon.png";
+import axios from "axios";
+
 
 const OrganizationDashboard = () => {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [visibleEvents, setVisibleEvents] = useState(6);
+
+  const [allEvents, setAllEvents] = useState([]);
 
   const eventsData = [
     {
@@ -118,6 +125,25 @@ const OrganizationDashboard = () => {
     setShowModal(false);
   };
 
+  useEffect(() => {
+    const getDashboard = async () => {
+      try {
+        const url1 = "http://localhost:8081/organization/allEvents";
+        const response1 = await axios.get(url1, { withCredentials: true });
+        const userEvents = response1.data;
+
+        setAllEvents(userEvents);
+        // setconsumerEvents(userEvents);
+        // setconsumerDetails(userDetails);
+        // console.log(userEvents);
+        // console.log(userDetails);
+      } catch (error) {
+        console.log(error);
+        navigate("/consumer/signin");
+      }
+    };
+    getDashboard();
+  }, [navigate]);
   return (
     <>
       <Navbar />
@@ -176,7 +202,7 @@ const OrganizationDashboard = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

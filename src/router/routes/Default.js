@@ -13,7 +13,8 @@ import OrganizationDashboard from "../../Pages/Organization/Dashboard/dashboard"
 const Default = () => {
   return (
     <Routes>
-      <Route index element={<OrganizationDashboard/>} />
+      <Route index element={<Home/>} />
+      <Route path="/organization/dashboard" element={<OrganizationDashboard />} />
       <Route path="/consumer/dashboard" element={<ConsumerDashboard />} />
       <Route path="/consumer/signin" element={<ConsumerSignin />} />
       <Route path="/consumer/signup" element={<ConsumerSignup />} />

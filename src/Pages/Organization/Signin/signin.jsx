@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 // import Navbar from "../.././components/Navbar/navbar";
 import styles from "./signin.module.css";
 import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 import axios from "axios";
 // import BASE_URL from "../.././pages/Utilis/helper"
@@ -15,6 +16,7 @@ const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formLoading, setFormLoading] = useState(false);
+  const [cookie, setCookie] = useCookies(["access_token"]);
 
   const loginOrganization = async () => {
     console.log("Entered");
@@ -40,14 +42,15 @@ const Signin = () => {
       const response = await axios.post(url, formData);
 
       if (response.status === 201) {
-        navigate("/dummy");
+        setCookie("access_token", response.data.jwttoken);
+        navigate("/organization/dashboard");
         return;
       }
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) {
         toast.success("Organization already registered");
-        navigate("/dummy");
+        navigate("/organization/dashboard");
       }
       if (error.response?.data?.message) {
         toast.error(error.response.data.message);
@@ -87,10 +90,8 @@ const Signin = () => {
             </div>
             <p>
               {" "}
-              Don't have account! <Link to={"/organization/signup"}>
-                Signup
-              </Link>{" "}
-              Now
+              Don't have account!{" "}
+              <Link to={"/organization/signup"}>Signup</Link> Now
             </p>
             <div className={styles.inputField}>
               <input
