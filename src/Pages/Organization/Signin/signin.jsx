@@ -42,7 +42,7 @@ const Signin = () => {
       const response = await axios.post(url, formData);
 
       if (response.status === 201) {
-        setCookie("access_token", response.data.jwttoken);
+        setCookie("access_token_org", response.data.jwttoken);
         navigate("/organization/dashboard");
         return;
       }

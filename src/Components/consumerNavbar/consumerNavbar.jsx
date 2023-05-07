@@ -12,7 +12,9 @@ const Navbar = () => {
         </h1>
       </div>
       <div className={styles.buttons}>
-        <button className={styles.friends}>Home</button>
+        <Link to={"/"} className={styles.friends}>
+          Home
+        </Link>
         <Link to={"/dashboard/logout"} className={styles.logout}>
           Past Events
         </Link>
