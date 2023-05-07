@@ -33,27 +33,25 @@ const AddEvent = ({ closeCallback }) => {
 
   const createEvent = async (e) => {
     e.preventDefault();
-    console.log("In create event");
-    console.log(eventName);
-    // if (!eventName) {
-    //   toast.error("Enter Event Name");
-    //   return;
-    // }
-    // if (!eventState) {
-    //   toast.error("Enter Event State");
-    //   return;
-    // }
-    // if (!eventDate) {
-    //   toast.error("Enter Event Date");
-    //   return;
-    // }
-    // if (!eventCity) {
-    //   toast.error("Enter Event city");
-    //   return;
-    // }
+
+    if (!eventName) {
+      toast.error("Enter Event Name");
+      return;
+    }
+    if (!eventState) {
+      toast.error("Enter Event State");
+      return;
+    }
+    if (!eventDate) {
+      toast.error("Enter Event Date");
+      return;
+    }
+    if (!eventCity) {
+      toast.error("Enter Event city");
+      return;
+    }
     setFormLoading(true);
 
-    console.log(rationDetails);
     const formData = {
       eventName: eventName,
       eventState: eventState,

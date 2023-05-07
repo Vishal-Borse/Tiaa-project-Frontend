@@ -18,7 +18,7 @@ import { MdEmojiEvents } from "react-icons/md";
 import profileImage from "../../../profile.png";
 import { useEffect, useState } from "react";
 import BookEvent from "../../../Components/eventBookModal/eventBook";
-import eventIcon from "./images/icon.png";
+import eventIcon from "./Images/icon.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -58,8 +58,28 @@ const Home = () => {
     setEndTime(e.target.value);
   };
 
-  const handleBookSlot = () => {
+  const handleBookSlot = (starttime,endtime) => {
     // Add your logic for booking the slot
+    e.preventDefault();
+    setFormLoading(true);
+
+    const formData = {
+      startTime : start
+    };
+    console.log(formData);
+    try {
+      const url = "http://localhost:8081/organization/addEvent";
+      const response = await axios.post(url, formData, {
+        withCredentials: true,
+      });
+      console.log(response);
+      navigate(0);
+    } catch (error) {
+      toast.error(error.response.data.message);
+      navigate("/organization/dashboard");
+    }
+    setFormLoading(false);
+
     console.log("Slot booked!");
     console.log("Start Time:", startTime);
     console.log("End Time:", endTime);
@@ -208,28 +228,31 @@ const Home = () => {
                 </table>
 
                 <div className={styles.book_slot}>
-                    <div className= {styles.input_container}>
-                      <label htmlFor="start-time">Start Time</label>
-                      <input
-                        type="text"
-                        id="start-time"
-                        value={startTime}
-                        onChange={handleStartTimeChange}
-                      />
-                    </div>
-                    <div className={styles.input_container}>
-                      <label htmlFor="end-time">End Time</label>
-                      <input
-                        type="text"
-                        id="end-time"
-                        value={endTime}
-                        onChange={handleEndTimeChange}
-                      />
-                    </div>
-                    <button className={styles.book_button} onClick={handleBookSlot}>
-                      Book the Slot
-                    </button>
+                  <div className={styles.input_container}>
+                    <label htmlFor="start-time">Start Time</label>
+                    <input
+                      type="text"
+                      id="start-time"
+                      value={startTime}
+                      onChange={handleStartTimeChange}
+                    />
                   </div>
+                  <div className={styles.input_container}>
+                    <label htmlFor="end-time">End Time</label>
+                    <input
+                      type="text"
+                      id="end-time"
+                      value={endTime}
+                      onChange={handleEndTimeChange}
+                    />
+                  </div>
+                  <button
+                    className={styles.book_button}
+                    onClick={handleBookSlot}
+                  >
+                    Book the Slot
+                  </button>
+                </div>
               </div>
             </div>
           )}

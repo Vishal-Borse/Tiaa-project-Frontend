@@ -178,7 +178,7 @@
   /* max-width: 400px; */
   text-align: center;
   position: relative;
-  font-size: 25px;
+  font-size: 15px;
 }
 
 /* .close {
@@ -203,7 +203,7 @@
 }
 
 .view_more button{
-  font-size: 25px;
+  font-size: 15px;
   background-color: #9326a7d6;
   padding: 20px;
   color: white;
@@ -216,8 +216,8 @@
 .event_table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
-  font-size: 22px;
+  margin-top: 10px;
+  font-size: 15px;
 }
 
 .event_table th,
@@ -260,7 +260,7 @@
 .input_container label {
   margin-right: 10px;
   margin-bottom: 4px;
-  font-size: 25px;
+  font-size: 15px;
   font-weight: 500;
 }
 
@@ -278,7 +278,7 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 23px;
+  font-size: 15px;
   color: white;
   margin-top: 35px;
 }
