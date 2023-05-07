@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { useNavigate } from "react-router-dom";
 // import Footer from "../.././components/Footer/footer";
 // import Navbar from "../.././components/Navbar/navbar";
@@ -151,6 +153,7 @@ const SignUp = () => {
               />
             </div>
           </form>
+          <ToastContainer />
         </div>
       </div>
     </div>

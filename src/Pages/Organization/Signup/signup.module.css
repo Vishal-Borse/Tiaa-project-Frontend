@@ -27,38 +27,42 @@
   font-weight: 600;
   margin-bottom: 1.5rem;
 }
-
-.inputField{
-    display: flex;
-    flex-direction: column;
+.form {
+  padding-left: 30px;
 }
-.inputField label{
-    margin-top: 10px;
+.inputField {
+  display: flex;
+  flex-direction: column;
 }
-
-.input{
-    width: 500px;
-    height: 20px;
-    border: 1px solid #674188;
-    border-radius: 5px;
-    padding: 8px 10px;
-    font-family: "Poppins", sans-serif;
-    margin: 5px ;
+.inputField label {
+  margin-top: 10px;
+  text-align: start;
+  padding-left: 4px;
 }
 
-.btn{
-    margin: 30px 5px;
-    padding: 10px 20px;
-    width: 200px;
-    background-color: #674188;
-    border: none;
-    border-radius: 5px;
-    font-family: "Poppins", sans-serif;
-    font-size: 15px;
-    color: #fff;
-
+.input {
+  width: 500px;
+  height: 20px;
+  border: 1px solid #674188;
+  border-radius: 5px;
+  padding: 8px 10px;
+  font-family: "Poppins", sans-serif;
+  margin: 5px;
 }
-.btn:hover{
-  background-color: #C3ACD0;
+
+.btn {
+  margin: 30px 5px;
+  padding: 10px 20px;
+  width: 200px;
+  height: 45px;
+  background-color: #674188;
+  border: none;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  color: #fff;
+}
+.btn:hover {
+  background-color: #c3acd0;
   transition: ease-in-out;
 }
