@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 // import Footer from "../.././components/Footer/footer.jsx";
 // import Navbar from "../.././components/Navbar/navbar.jsx";
 import Navbar from "../../../Components/organizationNavbar/organiserNavbar";
+// import myModal from "../../../Components/Modal/showModal";
 import { Footer } from "../../../Components/Footer/footer";
 import { FcOrganization } from "react-icons/fc";
 import { ImUsers } from "react-icons/im";

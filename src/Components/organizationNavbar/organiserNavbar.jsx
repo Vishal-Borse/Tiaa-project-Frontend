@@ -1,8 +1,15 @@
 import styles from "./organiserNav.module.css";
 // import { FcLike } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import AddEvent from "../addEventModal/addEvent";
 
-const organiserNavbar = () => {
+const OrganiserNavbar = () => {
+  const [isaddEventOpen, setIsaddEventOpen] = useState(false);
+
+  const handleAddEvent = () => {
+    setIsaddEventOpen(!isaddEventOpen);
+  };
   return (
     <div className={styles.navbar}>
       <div className={styles.logo}>
@@ -20,12 +27,13 @@ const organiserNavbar = () => {
         <Link to={"/signup"} className={styles.signin}>
           Contact Us
         </Link>
-        <Link to={"/"} className={styles.signup}>
+        <button onClick={handleAddEvent} className={styles.signup}>
           Add Event
-        </Link>
+        </button>
+        {isaddEventOpen ? <AddEvent closeCallback={handleAddEvent} /> : null}
       </div>
     </div>
   );
 };
 
-export default organiserNavbar;
+export default OrganiserNavbar;
