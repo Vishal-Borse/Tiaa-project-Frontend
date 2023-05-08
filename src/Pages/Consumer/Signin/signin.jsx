@@ -99,7 +99,7 @@ const SignUp = () => {
             <div className={styles.inputField}>
               <input
                 type="submit"
-                value="Register"
+                value="Login"
                 className={styles.btn}
                 onClick={submissionHandler}
                 disabled={formLoading}

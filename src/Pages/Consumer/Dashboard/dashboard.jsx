@@ -15,7 +15,7 @@ import { MdEmojiEvents } from "react-icons/md";
 import profileImage from "../../../profile.png";
 import { useEffect, useState } from "react";
 import BookEvent from "../../../Components/eventBookModal/eventBook";
-import eventIcon from "./Images/icon.png";
+import eventIcon from "./images/icon.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -26,7 +26,6 @@ const Home = () => {
   const [visibleEvents, setVisibleEvents] = useState(6);
   const [formLoading, setFormLoading] = useState(false);
   const [filter, setFilter] = useState("");
-  
 
   const [allEvents, setAllEvents] = useState([]);
 
@@ -64,7 +63,7 @@ const Home = () => {
 
   const handleBookSlot = async (starttime, endtime, ID, e) => {
     // Add your logic for booking the slot
-    e.preventDefault();
+    // e.preventDefault();
     setFormLoading(true);
 
     const formData = {
@@ -156,7 +155,6 @@ const Home = () => {
   return (
     <div className={styles.Home}>
       <Navbar />
-
       <section className={styles.profile}>
         <div className={styles.profile_img}>
           <img src={profileImage} />
@@ -200,6 +198,35 @@ const Home = () => {
               <option value="gujrat">Gujrat</option>
               <option value="haryana">Haryana</option>
               <option value="himachal_pradesh">Other</option>
+              <option value="andhra_pradesh">Andhra Pradesh</option>
+              <option value="arunachal_pradesh">Arunachal Pradesh</option>
+              <option value="assam">Assam</option>
+              <option value="bihar">Bihar</option>
+              <option value="chhatisgarh">Chhatisgarh</option>
+              <option value="goa">Goa</option>
+              <option value="gujrat">Gujrat</option>
+              <option value="haryana">Haryana</option>
+              <option value="himachal_pradesh">Himachal Pradesh</option>
+              <option value="jammu">Jammu</option>
+              <option value="jharkhand">Jharkhand</option>
+              <option value="karnataka">Karnataka</option>
+              <option value="kerala">Kerala</option>
+              <option value="madhya_pradesh">Madhya Pradesh</option>
+              <option value="maharashtra">Maharashtra</option>
+              <option value="manipur">Manipur</option>
+              <option value="meghalaya">Meghalaya</option>
+              <option value="mizoram">Mizoram</option>
+              <option value="nagaland">nagaland</option>
+              <option value="odisha">Odisha</option>
+              <option value="punjab">Punjab</option>
+              <option value="rajasthan">Rajasthan</option>
+              <option value="sikkim">Sikkim</option>
+              <option value="tamil_nadu">Tamil Nadu</option>
+              <option value="telangana">Telangana</option>
+              <option value="tripura">Tripura</option>
+              <option value="uttar_pradesh">Uttar Pradesh</option>
+              <option value="uttarakhand">Uttarakhand</option>
+              <option value="west_bengal">West Bengal</option>
               <option value="jammu_kashmir">Other</option>
               <option value="jharkhand">Other</option>
               <option value="karnataka">Other</option>

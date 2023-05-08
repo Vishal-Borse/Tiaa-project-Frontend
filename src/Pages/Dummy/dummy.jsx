@@ -1,20 +1,7 @@
-import styles from "./dummy.module.css";
-import { Link } from "react-router-dom";
-import Navbar from "../../Components/Navbar/navbar";
-import { Footer } from "../../Components/Footer/footer";
+import React from "react";
 
 const dummy = () => {
-  return (
-    <div>
-      <div>
-        <Navbar />
-      </div>
-      <div></div>
-      <div>
-        <Footer />
-      </div>
-    </div>
-  );
+  return <div>dummy</div>;
 };
 
 export default dummy;

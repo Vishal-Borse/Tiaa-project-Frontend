@@ -11,13 +11,13 @@ const Navbar = () => {
         </h1>
       </div>
       <div className={styles.buttons}>
-      <Link to={"/"} className={styles.signin}>
+        <Link to={"/"} className={styles.signin}>
           Home
         </Link>
-        <Link to={"/signin"} className={styles.signin}>
+        <Link to={"/aboutus"} className={styles.signin}>
           About Us
         </Link>
-        <Link to={"/signup"} className={styles.signup}>
+        <Link to={"/contactus"} className={styles.signup}>
           Contact Us
         </Link>
       </div>
