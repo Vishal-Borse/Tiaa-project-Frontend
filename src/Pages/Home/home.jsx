@@ -17,13 +17,14 @@ const Home = () => {
       <div className={styles.content}>
         <div className={styles.info}>
           <h1>
-            <strong>Save</strong> Money,
+            <strong>Skip</strong> waiting,
           </h1>
-          <h1>without thinking</h1>
-          <h1>about it.</h1>
+          <h1>Reserve your</h1>
+          <h1>Ration slot online</h1>
           <p>
-            BudgetTrack analyzes your spending and automatically saves the
-            perfect amount everyday. so you don't have to think about it
+            RationRelief enables customers to book slots for events, while
+            allowing the organization to update ration information, schedules,
+            and inventory in real-time
           </p>
           <div>
             <Link to={"/consumer/signin"} className={styles.info_signup}>
@@ -67,46 +68,46 @@ const Home = () => {
         </h1>
         <div className={styles.cards}>
           <div className={styles.fc_card}>
-            <h3>Best graded machines</h3>
+            <h3>Innovative Platform</h3>
             <span>
-              The mechanical lab consists of Fitting Shop, Sheet Metal Shop,
-              Foundry Shop, Welding Shop, Carpentry Shop.
+              Developed platform bridges the gap between organizations and
+              customers.
             </span>
           </div>
           <div className={styles.fc_card}>
-            <h3>Machine Shop</h3>
+            <h3>User-Friendly Interface</h3>
             <span>
-              The Machine shop is the heart and soul of mechanical engineering
-              branch. It deals with the various machining operations such as
-              turning, milling, shaping.
+              The unique interface enables organizations to easily add events
+              with location and time, while providing customers with seamless
+              slot booking experience.
             </span>
           </div>
           <div className={styles.fc_card}>
-            <h3>3D Printer</h3>
+            <h3>Unique Filtration Option</h3>
             <span>
-              There are 3 3D printers prsent in workshop for student usage.
+              This feature allows users to easily search and find events in
+              their respective state.
             </span>
           </div>
           <div className={styles.fc_card}>
-            <h3>Study area</h3>
+            <h3>Real-time Inventory Updates</h3>
             <span>
-              Special study/project dicussion area for students where students
-              can brainstorm their ideas.
+              Real-time inventory updates for efficient stock tracking and
+              management.
             </span>
           </div>
           <div className={styles.fc_card}>
-            <h3>CAD/CAM Lab</h3>
+            <h3>Targeted marketing emails</h3>
             <span>
-              Computer aided design/drafting and computer aided manufacturing
-              lab deals with the most modern technology of merging computer in
-              production industry
+              Targeted marketing emails for organizations to expand their reach
+              and connect with regional customers.
             </span>
           </div>
           <div className={styles.fc_card}>
-            <h3>Clubs</h3>
+            <h3>Transparent system</h3>
             <span>
-              Various clubs are present which are funded by the workshop like
-              bramhastra which makes buggy.
+              Transparent system displaying expiry dates to customers, ensuring
+              informed decisions and building trust in the platform.
             </span>
           </div>
         </div>
