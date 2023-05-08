@@ -25,10 +25,7 @@ const Home = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [visibleEvents, setVisibleEvents] = useState(6);
   const [formLoading, setFormLoading] = useState(false);
-<<<<<<< Updated upstream
   const [filter, setFilter] = useState("");
-=======
->>>>>>> Stashed changes
 
   const [allEvents, setAllEvents] = useState([]);
 
@@ -66,20 +63,9 @@ const Home = () => {
     setEndTime(e.target.value);
   };
 
-<<<<<<< Updated upstream
   const handleBookSlot = async (e, starttime, endtime, ID) => {
     // Add your logic for booking the slot
     // e.preventDefault();
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
-=======
-  const handleBookSlot = async (starttime, endtime) => {
-    // Add your logic for booking the slot
-    // e.preventDefault();
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     setFormLoading(true);
 
     console.log(starttime, endtime, ID);
@@ -87,13 +73,9 @@ const Home = () => {
     console.log("Entered in book");
 
     const formData = {
-<<<<<<< Updated upstream
       startTime: startTime,
       endTime: endTime,
       eventId: ID,
-=======
-      startTime: start,
->>>>>>> Stashed changes
     };
     console.log(formData);
     try {
