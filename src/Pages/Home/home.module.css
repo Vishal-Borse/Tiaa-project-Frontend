@@ -18,7 +18,7 @@
   /* margin-left: 100px; */
 }
 .info h1 {
-  margin: 5px;
+  margin: 0px;
   font-size: 45px;
   text-align: left;
 }
@@ -137,4 +137,10 @@
   font-weight: bold;
   color: rgb(153, 153, 153);
   /* font-family: 'Raleway', sans-serif; */
+}
+
+
+.startBtn{
+  display: flex;
+  align-items: start;
 }

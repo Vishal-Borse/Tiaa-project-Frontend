@@ -26,7 +26,7 @@ const Home = () => {
             allowing the organization to update ration information, schedules,
             and inventory in real-time
           </p>
-          <div>
+          <div className={styles.startBtn}>
             <Link to={"/consumer/signin"} className={styles.info_signup}>
               Consumer
             </Link>

@@ -67,9 +67,10 @@ const AddEvent = ({ closeCallback }) => {
         withCredentials: true,
       });
       console.log(response);
+      alert("Event Created Successfully");
       navigate(0);
     } catch (error) {
-      toast.error(error.response.data.message);
+      alert(error.response.data.message);
       navigate("/organization/dashboard");
     }
     setFormLoading(false);

@@ -6,6 +6,7 @@
     font-family: "Poppins", sans-serif;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+    padding: 30px 10px;
   }
   .logo {
     margin: 0 40px;

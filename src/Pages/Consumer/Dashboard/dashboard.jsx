@@ -15,7 +15,7 @@ import { MdEmojiEvents } from "react-icons/md";
 import profileImage from "../../../profile.png";
 import { useEffect, useState } from "react";
 import BookEvent from "../../../Components/eventBookModal/eventBook";
-import eventIcon from "./images/icon.png";
+import eventIcon from "./Images/icon.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -69,14 +69,16 @@ const Home = () => {
 <<<<<<< Updated upstream
   const handleBookSlot = async (e, starttime, endtime, ID) => {
     // Add your logic for booking the slot
-<<<<<<< Updated upstream
     // e.preventDefault();
+<<<<<<< Updated upstream
 =======
 >>>>>>> Stashed changes
 =======
   const handleBookSlot = async (starttime, endtime) => {
     // Add your logic for booking the slot
     // e.preventDefault();
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     setFormLoading(true);
 
