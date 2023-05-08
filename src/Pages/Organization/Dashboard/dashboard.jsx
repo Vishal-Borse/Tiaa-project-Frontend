@@ -17,101 +17,16 @@ import { MdEmojiEvents } from "react-icons/md";
 import profilePicture from "./images/profile_picture.webp";
 import eventIcon from "./images/icon.png";
 import axios from "axios";
+import profileImage from "../../../profile.png";
+
 
 const OrganizationDashboard = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [visibleEvents, setVisibleEvents] = useState(6);
-
+  const [organizationDetails, setOrganizationDetails] = useState([]);
   const [allEvents, setAllEvents] = useState([]);
-
-  const eventsData = [
-    {
-      id: 1,
-      name: "Event 1",
-      date: "May 10, 2023",
-      description: "Description for Event 1",
-      icon: eventIcon,
-    },
-    {
-      id: 2,
-      name: "Event 2",
-      date: "May 15, 2023",
-      description: "Description for Event 2",
-      icon: eventIcon,
-    },
-    {
-      id: 3,
-      name: "Event 3",
-      date: "May 15, 2023",
-      description: "Description for Event 3",
-      icon: eventIcon,
-    },
-    {
-      id: 4,
-      name: "Event 4",
-      date: "May 20, 2023",
-      description: "Description for Event 3",
-      icon: eventIcon,
-    },
-    {
-      id: 5,
-      name: "Event 5",
-      date: "May 20, 2023",
-      description: "Description for Event 3",
-      icon: eventIcon,
-    },
-    {
-      id: 6,
-      name: "Event 6",
-      date: "May 20, 2023",
-      description: "Description for Event 3",
-      icon: eventIcon,
-    },
-    {
-      id: 7,
-      name: "Event 6",
-      date: "May 20, 2023",
-      description: "Description for Event 3",
-      icon: eventIcon,
-    },
-    {
-      id: 8,
-      name: "Event 6",
-      date: "May 20, 2023",
-      description: "Description for Event 3",
-      icon: eventIcon,
-    },
-    {
-      id: 9,
-      name: "Event 6",
-      date: "May 20, 2023",
-      description: "Description for Event 3",
-      icon: eventIcon,
-    },
-    {
-      id: 10,
-      name: "Event 6",
-      date: "May 20, 2023",
-      description: "Description for Event 3",
-      icon: eventIcon,
-    },
-    {
-      id: 11,
-      name: "Event 6",
-      date: "May 20, 2023",
-      description: "Description for Event 3",
-      icon: eventIcon,
-    },
-    {
-      id: 12,
-      name: "Event 6",
-      date: "May 20, 2023",
-      description: "Description for Event 3",
-      icon: eventIcon,
-    },
-  ];
 
   const handleCardClick = (event) => {
     setSelectedEvent(event);
@@ -154,6 +69,12 @@ const OrganizationDashboard = () => {
         setAllEvents(userEvents);
         console.log(userEvents);
 
+        const url2 = "http://localhost:8081/organization/getDetails";
+        const response2 = await axios.get(url2, { withCredentials: true });
+        const userDetails = response2.data;
+        console.log("UserDetails"+ userDetails);
+        setOrganizationDetails(userDetails);
+
         // setconsumerEvents(userEvents);
         // setconsumerDetails(userDetails);
         // console.log(userEvents);
@@ -169,26 +90,23 @@ const OrganizationDashboard = () => {
     <>
       <Navbar />
       <div className={styles.App}>
-        <div className={styles.profile}>
-          <div className={styles.profilePhoto}>
-            <div className={styles.container}>
-              <img src={profilePicture} alt="Profile" />
-              <h2>Organization Name</h2>
-            </div>
+        <section className={styles.profile}>
+          <div className={styles.profile_img}>
+            <img src={profileImage} />
+            <h1>
+              {organizationDetails[0]?.name} 
+            </h1>
           </div>
-          <div className={styles.card_container}>
-            <h2>Organization Name</h2>
+          <div className={styles.details}>
             <p>
-              <strong>Active Since:</strong> 30/5/2002
+              Name : {organizationDetails[0]?.name}{" "}
             </p>
-            <p>
-              <strong>Founder:</strong> Founder name
-            </p>
-            <p>
-              <strong>CEO:</strong> CEO name
-            </p>
+            <p>Email : {organizationDetails[0]?.email}</p>
+            <p>License ID : {organizationDetails[0]?.liscenseId}</p>
+            <p>State : {organizationDetails[0]?.state}</p>
+            <p>City: {organizationDetails[0]?.city}</p>
           </div>
-        </div>
+        </section>
         <div className={styles.events}>
           <h1>Events</h1>
           <div className={styles.event_grid}>

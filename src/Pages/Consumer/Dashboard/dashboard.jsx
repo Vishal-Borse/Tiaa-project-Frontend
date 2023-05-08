@@ -57,55 +57,65 @@ const Home = () => {
     setStartTime(e.target.value);
   };
 
+  console.log(startTime, endTime);
+
   const handleEndTimeChange = (e) => {
     setEndTime(e.target.value);
   };
 
-  const handleBookSlot = async (starttime, endtime, ID, e) => {
+  const handleBookSlot = async (e, starttime, endtime, ID) => {
     // Add your logic for booking the slot
+<<<<<<< Updated upstream
     // e.preventDefault();
+=======
+>>>>>>> Stashed changes
     setFormLoading(true);
 
+    console.log(starttime, endtime, ID);
+
+    console.log("Entered in book");
+
     const formData = {
-      startTime: starttime,
-      endTime: endtime,
+      startTime: startTime,
+      endTime: endTime,
       eventId: ID,
     };
-    // console.log(formData);
+    console.log(formData);
     try {
       const url = "http://localhost:8081/consumer/bookSlot";
       const response = await axios.post(url, formData, {
         withCredentials: true,
       });
       console.log(response);
+      alert("Your Slot is Booked")
       navigate(0);
     } catch (error) {
-      toast.error(error.response.data.message);
-      navigate("/consumer/dashboard");
+      alert(error.response.data.message);
+      navigate(0);
     }
     setFormLoading(false);
 
-    console.log("Slot booked!");
-    console.log("Start Time:", startTime);
-    console.log("End Time:", endTime);
+    // console.log("Slot booked!");
+    // console.log("Start Time:", startTime);
+    // console.log("End Time:", endTime);
   };
 
-  const bookEvent = async (ID) => {
-    const formData = {
-      eventId: ID,
-    };
-    try {
-      const url = "http://localhost:8081/consumer/eventDetails";
-      const response = await axios.post(url, formData, {
-        withCredentials: true,
-      });
-      window.location.reload();
-    } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.message);
-    }
-    // setIsEventBookOpen(!isEventBookOpen);
-  };
+  // const bookEvent = async (ID) => {
+  //   const formData = {
+  //     eventId: ID,
+  //   };
+  //   try {
+  //     const url = "http://localhost:8081/consumer/eventDetails";
+  //     const response = await axios.post(url, formData, {
+  //       withCredentials: true,
+  //     });
+  //     window.location.reload();
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error(error.response.data.message);
+  //   }
+  //   // setIsEventBookOpen(!isEventBookOpen);
+  // };
 
   const filterClicked = (filterParams) => {
     setFilters(filterParams);
@@ -334,6 +344,7 @@ const Home = () => {
                   </tbody>
                 </table>
 
+                {/* <form onSubmit={handleBookSlot.bind(startTime, endTime, selectedEvent._id)}> */}
                 <div className={styles.book_slot}>
                   <div className={styles.input_container}>
                     <label htmlFor="start-time">Start Time</label>
@@ -355,11 +366,14 @@ const Home = () => {
                   </div>
                   <button
                     className={styles.book_button}
-                    onClick={handleBookSlot}
+                    onClick={(e) =>
+                      handleBookSlot(e, startTime, endTime, selectedEvent._id)
+                    }
                   >
                     Book the Slot
                   </button>
                 </div>
+                {/* </form> */}
               </div>
             </div>
           )}
