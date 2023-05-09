@@ -19,6 +19,7 @@ const SignUp = () => {
   const [formLoading, setFormLoading] = useState(false);
   const [licenseid, setlicenseid] = useState("");
   const [state, setstate] = useState("");
+  const [city, setCity] = useState("");
 
   const registerOrganization = async () => {
     if (!Organizationname) {
@@ -42,11 +43,11 @@ const SignUp = () => {
       return;
     }
     if (!state) {
-      toast.error("Enter Aadhar No");
+      toast.error("Enter State");
       return;
     }
-    if (!state) {
-      toast.error("Enter State");
+    if (!city) {
+      toast.error("Enter city");
       return;
     }
     setFormLoading(true);
@@ -117,6 +118,16 @@ const SignUp = () => {
                 className={styles.input}
                 value={state}
                 onChange={(e) => setstate(e.target.value)}
+              />
+            </div>
+            <div className={styles.inputField}>
+              <label>City</label>
+              <input
+                type="text"
+                placeholder="City"
+                className={styles.input}
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
               />
             </div>
 
